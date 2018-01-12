@@ -21,6 +21,22 @@ module SpotifyJukebox
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
+    # Load all subfolders
+    config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
+
+    # Use Eastern Time as default
+    config.time_zone = "America/New_York"
+
+    # RSpec is defulat test suite
+    config.generators do |g|
+      g.test_framework :rspec
+      g.integration_tool :rspec
+      g.fixture_replacement :factory_girl, dir: "spec/factories"
+      g.helper false
+    end
+
+    config.assets.js_compressor = :uglifier
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
